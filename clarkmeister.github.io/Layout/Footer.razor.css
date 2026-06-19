@@ -1,0 +1,17 @@
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    height: 10vh;
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(83, 83, 83);
+    color: white;
+}
+
+footer a {
+    display: flex;
+    align-items: center;
+}

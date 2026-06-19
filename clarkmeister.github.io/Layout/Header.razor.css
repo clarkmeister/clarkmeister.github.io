@@ -1,0 +1,14 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    background-color: rgb(83, 83, 83);
+    text-align: center;
+    color: white;
+}
+
+.main p {
+    margin: 0;
+    font-size: 24px;
+}

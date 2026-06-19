@@ -1,6 +1,4 @@
-﻿@inject IJSRuntime JS
-
-<ul class="nav-bar">
+﻿<ul class="nav-bar">
     <li class="nav-item">
         <button class="menu-btn" @onclick="ToggleNavMenu">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="lightgrey" d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/></svg>
@@ -8,7 +6,7 @@
     </li>
 </ul>
 
-<div class=@((collapseNavMenu ? "nav-div" : "nav-div-hidden"))>
+<div class=@((isNavOpen ? "nav-div" : "nav-div-hidden"))>
     <ul class="nav-list">
         <li class="nav-link">
             <NavLink href="" Match="NavLinkMatch.All" @onclick="ToggleNavMenu">
@@ -24,9 +22,9 @@
 </div>
 
 @code {
-    private bool collapseNavMenu = false;
+    private bool isNavOpen = false;
     private void ToggleNavMenu()
     {
-        collapseNavMenu = !collapseNavMenu;
+        isNavOpen = !isNavOpen;
     }
 }
