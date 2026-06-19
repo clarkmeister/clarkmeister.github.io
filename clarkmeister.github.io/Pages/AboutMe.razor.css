@@ -79,10 +79,17 @@
 }
 
 .timeline-content h4 {
-    margin: 0;
+    margin: 0 0 0.5rem;
     font-size: 0.9rem;
     color: #aaa;
     font-weight: normal;
+}
+
+.timeline-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #bbb;
+    line-height: 1.6;
 }
 
 /* Education */
