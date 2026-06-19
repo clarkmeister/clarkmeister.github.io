@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Navy background -->
+  <circle cx="50" cy="50" r="48" fill="#003366"/>
+  <!-- Ear tufts -->
+  <polygon points="33,34 26,12 42,27" fill="#FFB81C"/>
+  <polygon points="67,34 74,12 58,27" fill="#FFB81C"/>
+  <!-- Body -->
+  <ellipse cx="50" cy="63" rx="24" ry="24" fill="#FFB81C"/>
+  <!-- Face disc -->
+  <ellipse cx="50" cy="47" rx="22" ry="20" fill="#FFB81C"/>
+  <!-- Left eye -->
+  <circle cx="39" cy="44" r="10" fill="white"/>
+  <circle cx="39" cy="44" r="6.5" fill="#003366"/>
+  <circle cx="37" cy="42" r="2" fill="white"/>
+  <!-- Right eye -->
+  <circle cx="61" cy="44" r="10" fill="white"/>
+  <circle cx="61" cy="44" r="6.5" fill="#003366"/>
+  <circle cx="59" cy="42" r="2" fill="white"/>
+  <!-- Beak -->
+  <polygon points="50,52 44,61 56,61" fill="#CC8800"/>
+  <!-- Wing hints -->
+  <ellipse cx="29" cy="69" rx="10" ry="15" fill="#E6A000" transform="rotate(-12,29,69)"/>
+  <ellipse cx="71" cy="69" rx="10" ry="15" fill="#E6A000" transform="rotate(12,71,69)"/>
+</svg>
