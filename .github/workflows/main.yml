@@ -30,12 +30,28 @@ jobs:
     - name: Add .nojekyll
       run: touch clarkmeister.github.io/release/wwwroot/.nojekyll
 
-    - name: Rename .wasm to .bin
+    - name: Rename .wasm to .bin and fix integrity hashes
       working-directory: clarkmeister.github.io/release/wwwroot/_framework
       run: |
+        # Rename all .wasm files to .bin (content unchanged, so their own hashes stay valid)
         find . -name "*.wasm" | while read f; do mv "$f" "${f%.wasm}.bin"; done
-        find . -name "*.js" | xargs sed -i 's/\.wasm/.bin/g'
-        echo "Renamed $(find . -name '*.bin' | wc -l) files"
+
+        # blazor.webassembly.js holds the SRI hash for dotnet.js (and other JS).
+        # Patch each non-loader JS file first, then update its hash inside the loader.
+        LOADER=$(find . -name "blazor.webassembly*.js" | head -1)
+        find . -name "*.js" ! -name "blazor.webassembly*.js" | while read f; do
+          if grep -q '\.wasm' "$f"; then
+            OLD_HASH=$(openssl dgst -sha256 -binary < "$f" | base64 -w 0)
+            sed -i 's/\.wasm/.bin/g' "$f"
+            NEW_HASH=$(openssl dgst -sha256 -binary < "$f" | base64 -w 0)
+            sed -i "s|${OLD_HASH}|${NEW_HASH}|g" "$LOADER"
+            echo "Rehashedl $(basename $f)"
+          fi
+        done
+
+        # Now patch the loader itself (index.html has no integrity attr for it)
+        sed -i 's/\.wasm/.bin/g' "$LOADER"
+        echo "Done. .bin files: $(find . -name '*.bin' | wc -l)"
 
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v5
