@@ -1,37 +1,35 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">clarkmeister.github.io</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+﻿@inject IJSRuntime JS
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+<ul class="nav-bar">
+    <li class="nav-item">
+        <button class="menu-btn" @onclick="ToggleNavMenu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="lightgrey" d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/></svg>
+        </button>
+    </li>
+</ul>
+
+<div class=@((collapseNavMenu ? "nav-div" : "nav-div-hidden"))>
+    <ul class="nav-list">
+        <li class="nav-link">
+            <NavLink href="" Match="NavLinkMatch.All" @onclick="ToggleNavMenu">
+                Home
             </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
+        </li>
+        <li class="nav-link">
+            <NavLink href="resume" @onclick="ToggleNavMenu">
+                Resume
             </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+        </li>
+        <li class="nav-link">
+            <NavLink href="flappybird" @onclick="ToggleNavMenu">
+                Flappy Bird
             </NavLink>
-        </div>
-    </nav>
+        </li>
+    </ul>
 </div>
 
 @code {
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
+    private bool collapseNavMenu = false;
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
