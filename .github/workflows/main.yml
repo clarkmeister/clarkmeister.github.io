@@ -1,0 +1,55 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Publish
+      working-directory: clarkmeister.github.io
+      run: dotnet publish clarkmeister.github.io.csproj -c Release -o release --nologo
+
+    - name: Copy index.html to 404.html
+      run: cp clarkmeister.github.io/release/wwwroot/index.html clarkmeister.github.io/release/wwwroot/404.html
+
+    - name: Add .nojekyll
+      run: touch clarkmeister.github.io/release/wwwroot/.nojekyll
+
+    - name: Rename .wasm to .bin
+      working-directory: clarkmeister.github.io/release/wwwroot/_framework
+      run: |
+        find . -name "*.wasm" | while read f; do mv "$f" "${f%.wasm}.bin"; done
+        find . -name "*.js" | xargs sed -i 's/\.wasm/.bin/g'
+        echo "Renamed $(find . -name '*.bin' | wc -l) files"
+
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v5
+      with:
+        path: clarkmeister.github.io/release/wwwroot
+        include-hidden-files: true
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v5
