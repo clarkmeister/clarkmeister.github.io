@@ -1,4 +1,83 @@
 @page "/resume"
 
-<h3>Resume</h3>
-<p>Coming soon.</p>
+<div class="about-page">
+    <div class="hero">
+        <h1>About Me</h1>
+        <p class="subtitle">Software Engineer &middot; Full Stack Developer</p>
+    </div>
+
+    <div class="content">
+        <section class="card">
+            <h2>Background</h2>
+            <p>
+                I grew up in a small town and spent my early working years operating and maintaining farm equipment.
+                At 25, I decided to pursue a long-standing interest in computers and enrolled at Oregon Institute of Technology,
+                starting in Hardware Engineering before switching to Software Engineering Technology.
+                Through OIT's MECOP internship program I completed two 6-month internships —
+                at Intel as an Automated Testing Intern and at Portland General Electric as a DevOps Intern.
+                I graduated with a B.S. in Software Engineering Technology in March 2020.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Feb 2025 – Present</div>
+                    <div class="timeline-content">
+                        <h3>Software Engineer</h3>
+                        <h4>Hanford Tank Waste Operations &amp; Closure (H2C)</h4>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Oct 2021 – Feb 2025</div>
+                    <div class="timeline-content">
+                        <h3>Software Engineer</h3>
+                        <h4>Washington River Protection Solutions</h4>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Jun 2018 – Dec 2018</div>
+                    <div class="timeline-content">
+                        <h3>DevOps Intern</h3>
+                        <h4>Portland General Electric</h4>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Jul 2017 – Jan 2018</div>
+                    <div class="timeline-content">
+                        <h3>Software Engineer Intern</h3>
+                        <h4>Intel</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Education</h2>
+            <div class="edu-item">
+                <h3>Oregon Institute of Technology</h3>
+                <p>B.S. Software Engineering Technology &middot; 2020</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Skills</h2>
+            <div class="skills">
+                @foreach (var skill in _skills)
+                {
+                    <span class="skill-badge">@skill</span>
+                }
+            </div>
+        </section>
+    </div>
+</div>
+
+@code {
+    private readonly string[] _skills =
+    [
+        "C#", ".NET", "Full Stack", "SQL", "Git",
+        "Azure DevOps", "Azure", "AWS", "Docker", "Linux",
+        "GitHub Copilot", "Jama Software"
+    ];
+}
